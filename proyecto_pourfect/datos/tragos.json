@@ -1,0 +1,16 @@
+[
+  {
+    "nombre": "Mojito",
+    "tipo": "con-alcohol",
+    "imagen": "mojito.jpg",
+    "descripcion": "Refrescante trago cubano con ron, lima, menta y soda.",
+    "ingredientes": ["50ml ron blanco", "1 lima", "10 hojas de menta", "Soda", "Azúcar"]
+  },
+  {
+    "nombre": "Limonada",
+    "tipo": "sin-alcohol",
+    "imagen": "limonada.jpg",
+    "descripcion": "Bebida refrescante a base de jugo de limón.",
+    "ingredientes": ["3 limones", "500ml agua", "Azúcar a gusto", "Hielo"]
+  }
+]

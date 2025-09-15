@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pourfect</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Pantalla 1 -->
+  <div id="pantalla1" class="pantalla activa">
+    <img src="imagenes/logo-portada.png" alt="Logo" class="logo-portada">
+  </div>
+  <!-- Pantalla 2 -->
+  <div id="pantalla2" class="pantalla">
+    <img src="imagenes/pantalla2.png" alt="Fondo" class="fondo">
+    <button id="btnSiguiente" class="btn">Siguiente</button>
+  </div>
+
+  <!-- Pantalla 3 -->
+  <!-- PANTALLA 3 -->
+<div id="pantalla3" class="pantalla">
+  <header>
+    <div class="logo-box">
+      <img src="imagenes/logo-mini.png" alt="Mini Logo" class="logo-mini">
+      <div class="titulo-header">
+        Pourfect <span class="subtitulo">Drink & rate</span>
+      </div>
+    </div>
+    <nav>
+      <button onclick="mostrarLogin()">Login</button>
+      <button onclick="mostrarRegistro()">Registrarse</button>
+    </nav>
+  </header>
+
+  <img src="imagenes/pantalla3.png" alt="Fondo" class="fondo">
+  <div id="formularios"></div>
+</div>
+
+  <!-- Pantalla 4 -->
+  <!-- PANTALLA 4 -->
+<div id="pantalla4" class="pantalla">
+  <header>
+    <div class="logo-box">
+      <img src="imagenes/logo-mini.png" alt="Mini Logo" class="logo-mini">
+      <div class="titulo-header">
+        Pourfect <span class="subtitulo">Drink & rate</span>
+      </div>
+    </div>
+  </header>
+
+  <input type="text" id="busqueda" placeholder="Buscar trago...">
+  <select id="filtro">
+    <option value="todos">Todos</option>
+    <option value="con-alcohol">Con alcohol</option>
+    <option value="sin-alcohol">Sin alcohol</option>
+  </select>
+  <div id="lista-tragos"></div>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="cerrarModal">&times;</span>
+      <h2 id="modalTitulo"></h2>
+      <img id="modalImagen" alt="Imagen trago">
+      <p id="modalDescripcion"></p>
+      <ul id="modalIngredientes"></ul>
+      <div id="modalEstrellas"></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
