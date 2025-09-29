@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pourfect</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="datos/tragos.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Pantalla 1 -->
+<div id="pantalla1" class="pantalla activa">
+  <div class="portada-wrap">
+    <img src="imagenes/logo-portada.png" alt="Logo" class="logo-portada">
+  </div>
+</div>
+
+<!-- Pantalla 2 -->
+<div id="pantalla2" class="pantalla pantalla-fondo2">
+  <button id="btnSiguiente" class="btn">Siguiente</button>
+</div>
+
+<!-- Pantalla 3 -->
+<div id="pantalla3" class="pantalla pantalla-fondo3">
+  <header class="topbar">
+    <div class="logo-box">
+      <img src="imagenes/logo-mini.png" alt="Mini Logo" class="logo-mini">
+      <div class="titulo-header">
+        Pourfect <span class="subtitulo">Drink & rate</span>
+      </div>
+    </div>
+    <nav class="nav-right">
+      <button onclick="mostrarLogin()" class="btn small">Login</button>
+      <button onclick="mostrarRegistro()" class="btn small">Registrarse</button>
+    </nav>
+  </header>
+  <div id="formularios" class="formularios"></div>
+</div>
+
+
+  <!-- Pantalla 4 (menú de tragos) -->
+  <div id="pantalla4" class="pantalla">
+    <header class="topbar">
+      <div class="logo-box">
+        <img src="imagenes/logo-mini.png" alt="Mini Logo" class="logo-mini">
+        <div class="titulo-header">
+          Pourfect <span class="subtitulo">Drink & rate</span>
+        </div>
+      </div>
+      <nav class="nav-right">
+        <button id="btnFavoritos" class="btn small">Favoritos</button>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <div class="controls">
+        <input type="text" id="busqueda" placeholder="Buscar trago...">
+        <select id="filtro">
+          <option value="todos">Todos</option>
+          <option value="con-alcohol">Con alcohol</option>
+          <option value="sin-alcohol">Sin alcohol</option>
+        </select>
+      </div>
+
+      <div id="lista-tragos" class="grid"></div>
+    </main>
+
+    <div id="modal" class="modal" role="dialog" aria-hidden="true">
+  <div class="modal-content modal-flex">
+    <button id="cerrarModal" class="close">✕</button>
+    <div class="modal-left">
+      <img id="modalImagen" alt="Imagen trago" class="modal-img">
+    </div>
+    <div class="modal-right">
+      <h2 id="modalTitulo"></h2>
+      <p id="modalDescripcion"></p>
+      <h4>Ingredientes</h4>
+      <ul id="modalIngredientes"></ul>
+      <h4>Paso a paso</h4>
+      <ol id="modalPasos"></ol> <!-- 👈 este bloque nuevo -->
+      <div id="modalEstrellas"></div>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- Pantalla Favoritos -->
+  <div id="pantallaFavoritos" class="pantalla">
+    <header class="topbar">
+      <div class="logo-box">
+        <img src="imagenes/logo-mini.png" alt="Mini Logo" class="logo-mini">
+        <div class="titulo-header">
+          Pourfect <span class="subtitulo">Favoritos</span>
+        </div>
+      </div>
+      <nav class="nav-right">
+        <button onclick="cambiarPantalla(4)" class="btn small">Volver</button>
+      </nav>
+    </header>
+    <main class="main-content">
+      <div id="lista-favoritos" class="grid"></div>
+    </main>
+  </div>
+</body>
+</html>
