@@ -129,6 +129,7 @@ La aplicación incluye:
 - ✅ **Compatibilidad** total con el frontend
 
 ---
-**Desarrollado por**: [Tu nombre]  
-**Fecha**: [Fecha actual]  
-**Versión**: 1.0.0
+**Desarrollado por**: OctaDelRey
+**Fecha**: 5/10/2025
+
+**Versión**: 4.0.0
