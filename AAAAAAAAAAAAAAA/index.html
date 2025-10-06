@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pourfect - Drink & Rate</title>
+  <meta name="description" content="Descubre y califica los mejores tragos y cócteles con Pourfect">
+  <link rel="stylesheet" href="style.css">
+  <script src="datos/tragos.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- HEADER UNIFICADO -->
+  <header class="topbar" id="topbar">
+    <div class="logo-box">
+      <img src="imagenes/logo-mini.png" alt="Mini Logo" class="logo-mini">
+      <div class="titulo-header">
+        Pourfect <span class="subtitulo">Drink & Rate</span>
+      </div>
+    </div>
+
+    <!-- Controles de búsqueda -->
+    <div class="nav-search">
+      <input type="text" id="busqueda" placeholder="Buscar trago..." aria-label="Buscar tragos">
+      <select id="filtro" aria-label="Filtrar por tipo">
+        <option value="todos">Todos</option>
+        <option value="con-alcohol">Con alcohol</option>
+        <option value="sin-alcohol">Sin alcohol</option>
+      </select>
+    </div>
+
+    <nav class="nav-right">
+      <!-- Antes de iniciar sesión -->
+      <button id="btnLogin" onclick="mostrarLogin()" class="btn small">Iniciar sesión</button>
+      <button id="btnRegistro" onclick="mostrarRegistro()" class="btn small">Registrarse</button>
+
+      <!-- Después de iniciar sesión -->
+      <button id="btnPerfil" onclick="mostrarPerfil()" class="btn small oculto">Perfil</button>
+      <button id="btnCerrar" onclick="cerrarSesion()" class="btn small oculto">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Pantalla 1 - Portada -->
+    <section id="pantalla1" class="pantalla activa">
+      <div class="portada-wrap">
+        <img src="imagenes/logo-portada.png" alt="Logo Pourfect" class="logo-portada">
+      </div>
+    </section>
+
+    <!-- Pantalla 3 - Login/Registro -->
+    <section id="pantalla3" class="pantalla">
+      <div id="formularios" class="formularios"></div>
+    </section>
+
+    <!-- Pantalla 4 - Menú de tragos -->
+    <section id="pantalla4" class="pantalla">
+      <div id="lista-tragos" class="grid" role="grid" aria-label="Lista de tragos"></div>
+
+      <!-- Modal de detalle -->
+      <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modalTitulo">
+        <div class="modal-content modal-flex">
+          <button id="cerrarModal" class="close" aria-label="Cerrar modal">✕</button>
+          <div class="modal-left">
+            <img id="modalImagen" alt="Imagen del trago" class="modal-img">
+          </div>
+          <div class="modal-right">
+            <h2 id="modalTitulo"></h2>
+            <p id="modalDescripcion"></p>
+            <h4>Ingredientes</h4>
+            <ul id="modalIngredientes"></ul>
+            <h4>Paso a paso</h4>
+            <ol id="modalPasos"></ol>
+            <div id="modalEstrellas" class="modal-estrellas"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pantalla Perfil -->
+    <section id="pantallaPerfil" class="pantalla">
+      <main class="main-content perfil">
+        <div class="perfil-top">
+          <img id="perfilFoto" src="imagenes/avatar.png" alt="Foto de perfil" class="perfil-foto">
+          <div class="perfil-meta">
+            <p id="perfilUsuario">@usuario</p>
+            <p id="perfilBio">Biografía (máx 30 caracteres)</p>
+            <div class="perfil-buttons">
+              <button id="btnVerFavoritos" class="btn">Mis Favoritos</button>
+              <button id="btnEditarPerfil" class="btn">Editar perfil</button>
+              <button id="btnInfoGeneral" onclick="cambiarPantalla('pantallaInfo')" class="btn">Info. sobre tragos</button>
+              <button onclick="cerrarSesion()" class="btn" style="background: #666;">Cerrar sesión</button>
+            </div>
+          </div>
+        </div>
+
+        <section>
+          <h3>Mis favoritos</h3>
+          <div id="perfilFavoritos" class="grid" role="grid" aria-label="Tragos favoritos"></div>
+        </section>
+
+        <section>
+          <h3>Agregar nuevo trago</h3>
+          <form id="formAgregarTrago" enctype="multipart/form-data" class="form-vertical">
+            <input type="text" name="nombre" placeholder="Nombre del trago" required aria-label="Nombre del trago">
+            <select name="tipo" required aria-label="Tipo de trago">
+              <option value="con-alcohol">Con alcohol</option>
+              <option value="sin-alcohol">Sin alcohol</option>
+            </select>
+            <textarea name="descripcion" placeholder="Descripción" maxlength="500" required aria-label="Descripción del trago"></textarea>
+            <textarea name="ingredientes" placeholder="Ingredientes (separados por coma)" required aria-label="Lista de ingredientes"></textarea>
+            <textarea name="pasos" placeholder="Pasos (separados por salto de línea)" required aria-label="Pasos de preparación"></textarea>
+            <input type="file" name="imagen" accept="image/*" required aria-label="Imagen del trago">
+            <button type="submit" class="btn">Guardar trago</button>
+          </form>
+        </section>
+      </main>
+    </section>
+
+    <!-- Pantalla Info -->
+    <section id="pantallaInfo" class="pantalla">
+      <main class="main-content">
+        <h2>Información general sobre tragos</h2>
+        <p class="lead">Aquí podés poner materiales, técnicas, herramientas y tips.</p>
+        
+        <article class="info-card">
+          <h3>Materiales</h3>
+          <ul>
+            <li>Vasos: old fashioned, highball, copa de cóctel.</li>
+            <li>Herramientas: coctelera, colador, muddler, medidor (jigger).</li>
+          </ul>
+        </article>
+        
+        <article class="info-card">
+          <h3>Técnicas</h3>
+          <ul>
+            <li>Macerar (muddling)</li>
+            <li>Agitar (shaking)</li>
+            <li>Remover (stirring)</li>
+            <li>Colado simple y doble colado</li>
+          </ul>
+        </article>
+        
+        <article class="info-card">
+          <h3>Consejos</h3>
+          <ul>
+            <li>Usá ingredientes frescos para mejores resultados.</li>
+            <li>Medí con jigger para consistencia.</li>
+            <li>Enfriá las copas cuando haga falta.</li>
+          </ul>
+        </article>
+      </main>
+    </section>
+  </main>
+</body>
+</html>

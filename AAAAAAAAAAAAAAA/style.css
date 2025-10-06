@@ -1,0 +1,512 @@
+/* Reset y configuración base */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f3e5d8;
+  color: #111;
+}
+
+/* Sistema de pantallas */
+.pantalla {
+  display: none;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.pantalla.activa {
+  display: block;
+}
+
+/* Pantalla de portada */
+.portada-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.logo-portada {
+  width: 320px;
+  border-radius: 50%;
+  border: 6px solid #8b0000;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+}
+
+/* Fondos de pantalla */
+.pantalla-fondo2 {
+  background: url("imagenes/pantalla2.png") center/cover no-repeat;
+}
+
+.pantalla-fondo3 {
+  background: url("imagenes/pantalla3.png") center/cover no-repeat;
+}
+
+/* Header fijo */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #8b0000;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 999;
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-mini {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.titulo-header {
+  font-family: Montserrat, Arial, sans-serif;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.titulo-header .subtitulo {
+  display: block;
+  font-size: 0.6rem;
+  opacity: 0.95;
+}
+
+/* Navegación derecha */
+.nav-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Barra de búsqueda en el header */
+.nav-search {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0 16px;
+}
+
+.nav-search input,
+.nav-search select {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Contenido principal con offset para header fijo */
+#main {
+  padding-top: 74px;
+}
+
+.main-content {
+  padding: 18px;
+}
+
+/* Controles */
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.controls input,
+.controls select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Grid de tragos */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  padding: 10px;
+}
+
+.trago {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.trago:hover {
+  transform: translateY(-2px);
+}
+
+.trago .thumb {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 3px solid #8b0000;
+}
+
+.trago .content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.trago h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.trago .actions {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+/* Botones */
+.btn {
+  background: #8b0000;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #a30000;
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: .95rem;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.modal[open],
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: auto;
+  display: flex;
+  gap: 20px;
+}
+
+.modal-left {
+  flex: 1;
+  max-width: 40%;
+}
+
+.modal-right {
+  flex: 2;
+}
+
+.modal-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  float: right;
+  color: #666;
+}
+
+.close:hover {
+  color: #000;
+}
+
+/* Estrellas de puntaje */
+.estrellas {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.estrella {
+  font-size: 28px;
+  cursor: pointer;
+  color: #ccc;
+  padding: 2px;
+  transition: color 0.2s ease;
+}
+
+.estrella:hover,
+.estrella.activa {
+  color: gold;
+}
+
+/* Formularios de login/registro */
+.form-card {
+  max-width: 320px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fffaf5;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.form-card h3 {
+  margin-bottom: 15px;
+  color: #8b0000;
+}
+
+.form-card input {
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-card .btn {
+  width: 100%;
+  background: #8b0000;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+/* Formulario para agregar trago */
+#formAgregarTrago {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+#formAgregarTrago input,
+#formAgregarTrago select,
+#formAgregarTrago textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#formAgregarTrago button {
+  background: #8b0000;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#formAgregarTrago button:hover {
+  background: #a30000;
+}
+
+/* Perfil de usuario */
+.perfil-top {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.perfil-foto {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #8b0000;
+}
+
+.perfil-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Tarjetas de información */
+.info-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.info-card h3 {
+  color: #8b0000;
+  margin-top: 0;
+}
+
+.info-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* Utilidades */
+.oculto {
+  display: none !important;
+}
+
+/* Header oculto al inicio */
+#topbar {
+  display: none;
+}
+
+/* Avatar en botón de perfil */
+#btnPerfil img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+  border: 1px solid rgba(255,255,255,0.3);
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+#btnPerfil:hover img {
+  transform: scale(1.1);
+}
+
+/* Indicador de carga para avatar */
+.avatar-loading {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #8b0000, #a30000);
+  margin-right: 5px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Botón de volver al menú */
+#btnVolverMenu {
+  background: #666 !important;
+  margin-bottom: 8px;
+}
+
+#btnVolverMenu:hover {
+  background: #555 !important;
+}
+
+/* Responsive design */
+@media (max-width: 700px) {
+  .titulo-header {
+    font-size: 1.1rem;
+  }
+  
+  .logo-portada {
+    width: 220px;
+  }
+  
+  .trago .thumb {
+    height: 140px;
+  }
+  
+  .modal-content {
+    flex-direction: column;
+    max-width: 95%;
+  }
+  
+  .modal-left,
+  .modal-right {
+    max-width: 100%;
+  }
+  
+  .nav-search {
+    flex-direction: column;
+    gap: 4px;
+    margin: 0 8px;
+  }
+  
+  .nav-search input,
+  .nav-search select {
+    width: 100%;
+    min-width: 120px;
+  }
+  
+  .perfil-top {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .perfil-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 8px 12px;
+  }
+  
+  .logo-mini {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .titulo-header {
+    font-size: 1rem;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    padding: 8px;
+  }
+  
+  .trago .thumb {
+    height: 120px;
+  }
+}
