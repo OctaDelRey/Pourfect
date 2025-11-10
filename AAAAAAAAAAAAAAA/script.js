@@ -485,8 +485,7 @@ function mostrarPerfil() {
     btnEditar.onclick = mostrarFormularioEditarPerfil;
   }
   
-  // Cargar favoritos y creaciones del perfil
-  mostrarFavoritosPerfil();
+  // Cargar creaciones del perfil
   mostrarCreacionesPerfil();
   
   // Agregar botón de volver al menú
@@ -1243,7 +1242,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // Validaciones comunes
           if (file.size > 2 * 1024 * 1024) { alert('La imagen no puede ser mayor a 2MB'); return; }
           const ext = (file.name.toLowerCase().split('.').pop() || 'jpg');
-          if (ext !== 'jpg' && ext !== 'jpeg') { alert('Solo se permiten archivos JPG'); return; }
+          if (!['jpg','jpeg','png','webp'].includes(ext)) { alert('Solo se permiten imágenes JPG, PNG o WebP'); return; }
 
           if (window.api && window.api.mode === 'api') {
             const fd = new FormData();
@@ -1293,24 +1292,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   
-  // Cargar tragos cuando se accede a la pantalla 4
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-        const pantalla4 = document.getElementById('pantalla4');
-        if (pantalla4 && pantalla4.classList.contains('activa')) {
-          if (typeof tragos !== 'undefined') {
-            renderTragos(tragos);
-          }
-        }
-      }
-    });
-  });
-  
-  // Observar cambios en las pantallas
-  document.querySelectorAll('.pantalla').forEach(pantalla => {
-    observer.observe(pantalla, { attributes: true });
-  });
+  // (Eliminado) Re-render forzado de pantalla4 que sobreescribía resultados de la API
   
   // Actualizar header
   actualizarHeader();
@@ -1379,11 +1361,19 @@ async function eliminarTrago(tragoId, tragoNombre) {
   }
   
   try {
-    // Eliminar de las creaciones locales
-    deleteUserCreation(tragoId);
-    alert('✅ Trago eliminado exitosamente');
+    if (window.api && window.api.mode === 'api') {
+      const ok = await deleteDrinkAPI(tragoId);
+      if (!ok) throw new Error('No se pudo eliminar en el servidor');
+      alert('✅ Trago eliminado exitosamente');
+    } else {
+      // Eliminar de las creaciones locales
+      deleteUserCreation(tragoId);
+      alert('✅ Trago eliminado exitosamente');
+    }
     // Recargar las creaciones
     mostrarCreacionesPerfil();
+    // Refrescar lista principal
+    cargarTragosAPI();
   } catch (error) {
     console.error('Error eliminando trago:', error);
     alert('❌ Error al eliminar el trago: ' + error.message);

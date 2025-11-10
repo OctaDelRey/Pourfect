@@ -8,14 +8,17 @@ class PourfectAPI {
         // Forzar API siempre
         this.baseURL = './api';
         this.mode = 'api';
+        this.debug = false;
         
         this.headers = {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         };
         
-        console.log('API Base URL:', this.baseURL);
-        console.log('Mode:', this.mode);
+        if (this.debug) {
+            console.log('API Base URL:', this.baseURL);
+            console.log('Mode:', this.mode);
+        }
     }
 
     /**
@@ -33,19 +36,21 @@ class PourfectAPI {
             ...options
         };
 
-        console.log('API Request:', {
-            url: url,
-            method: config.method || 'GET',
-            headers: config.headers,
-            body: config.body
-        });
+        if (this.debug) {
+            console.log('API Request:', {
+                url: url,
+                method: config.method || 'GET',
+                headers: config.headers,
+                body: config.body
+            });
+        }
 
         try {
             const response = await fetch(url, config);
-            console.log('API Response Status:', response.status);
+            if (this.debug) console.log('API Response Status:', response.status);
             
             const data = await response.json();
-            console.log('API Response Data:', data);
+            if (this.debug) console.log('API Response Data:', data);
 
             if (!response.ok) {
                 throw new Error(data.message || 'Error en la petición');
@@ -53,9 +58,11 @@ class PourfectAPI {
 
             return data;
         } catch (error) {
-            console.error('Error en API:', error);
-            console.error('URL intentada:', url);
-            console.error('Configuración:', config);
+            if (this.debug) {
+                console.error('Error en API:', error);
+                console.error('URL intentada:', url);
+                console.error('Configuración:', config);
+            }
             throw error;
         }
     }
